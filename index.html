@@ -5,11 +5,762 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="mediaquery.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      p {
+        color: rgb(85, 85, 85);
+      }
+
+      /* ANIMATIONS */
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 0.8s ease;
+      }
+
+      .fade-in-up.animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .fade-in {
+        opacity: 0;
+        transition: all 1s ease;
+      }
+
+      .fade-in.animate {
+        opacity: 1;
+      }
+
+      .section-border {
+        position: relative;
+        padding-top: 4vh;
+      }
+
+      .section-border::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #353535, transparent);
+        transition: width 1s ease 0.5s;
+        transform: translateX(-50%);
+      }
+
+      .section-border.animate::before {
+        width: 80%;
+      }
+
+      /* TRANSITION */
+      a,
+      .btn {
+        transition: all 300ms ease;
+      }
+
+      /* DESKTOP NAV */
+      nav,
+      .nav-links {
+        display: flex;
+      }
+
+      nav {
+        justify-content: space-around;
+        align-items: center;
+        height: 17vh;
+      }
+
+      .nav-links {
+        gap: 2rem;
+        list-style: none;
+        font-size: 1.5rem;
+      }
+
+      a {
+        color: black;
+        text-decoration: none;
+        text-decoration-color: white;
+      }
+
+      .nav-links a {
+        position: relative;
+      }
+
+      .nav-links a:hover {
+        color: grey;
+      }
+
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background: #353535;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .logo {
+        font-size: 2rem;
+      }
+
+      .logo:hover {
+        cursor: default;
+      }
+
+      /* HAMBURGER MENU */
+      #hamburger-nav {
+        display: none;
+      }
+
+      .hamburger-menu {
+        position: relative;
+        display: inline-block;
+      }
+
+      .hamburger-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 24px;
+        width: 30px;
+        cursor: pointer;
+        padding: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger-icon:hover {
+        transform: scale(1.1);
+      }
+
+      .hamburger-icon span {
+        width: 100%;
+        height: 2px;
+        background-color: black;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform-origin: center;
+      }
+
+      .menu-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        width: fit-content;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+
+      .menu-links a {
+        display: block;
+        padding: 15px 20px;
+        text-align: center;
+        font-size: 1.2rem;
+        color: black;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .menu-links a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: #353535;
+        transition: width 0.3s ease;
+      }
+
+      .menu-links a:hover::before {
+        width: 100%;
+      }
+
+      .menu-links a:hover {
+        background-color: #f8f8f8;
+        color: #353535;
+      }
+
+      .menu-links li {
+        list-style: none;
+      }
+
+      .menu-links.open {
+        max-height: 300px;
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .hamburger-icon.open span:first-child {
+        transform: rotate(45deg) translate(8px, 8px);
+        background-color: #555;
+      }
+
+      .hamburger-icon.open span:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      .hamburger-icon.open span:last-child {
+        transform: rotate(-45deg) translate(8px, -8px);
+        background-color: #555;
+      }
+
+      /* SECTIONS */
+      section {
+        padding-top: 4vh;
+        height: 96vh;
+        margin: 0 10rem;
+        box-sizing: border-box;
+        min-height: fit-content;
+      }
+
+      .section-container {
+        display: flex;
+      }
+
+      /* PROFILE SECTION */
+      #profile {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+        height: 80vh;
+        /* Removed background, border-radius, padding, and box-shadow */
+      }
+
+      .section__pic-container {
+        display: flex;
+        height: 400px;
+        width: 400px;
+        margin: auto 0;
+      }
+      
+
+      /* Fixed circular profile image */
+      .section__pic-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        /* Removed border completely */
+        transition: transform 0.3s ease;
+      }
+
+      .section__pic-container img:hover {
+        transform: scale(1.05);
+      }
+
+      .section__text {
+        align-self: center;
+        text-align: center;
+      }
+
+      .section__text p {
+        font-weight: 600;
+      }
+
+      .section__text__p1 {
+        text-align: center;
+      }
+
+      .section__text__p2 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .title {
+        font-size: 3rem;
+        text-align: center;
+      }
+
+      #socials-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        gap: 1rem;
+      }
+
+      /* ICONS */
+      .icon {
+        cursor: pointer;
+        height: 2rem;
+      }
+
+      .icon:not(.contact-icon):not(article .icon) {
+        transition: all 0.3s ease;
+      }
+
+      .icon:not(.contact-icon):not(article .icon):hover {
+        transform: scale(1.1);
+      }
+
+      /* BUTTONS */
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .btn {
+        font-weight: 600;
+        transition: all 300ms ease;
+        padding: 1rem;
+        width: 8rem;
+        border-radius: 2rem;
+        position: relative;
+        overflow: hidden;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      }
+
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        transition: all 0.6s ease;
+        transform: translate(-50%, -50%);
+      }
+
+      .btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      }
+
+      .btn-color-1,
+      .btn-color-2 {
+        border: rgb(53, 53, 53) 0.1rem solid;
+      }
+
+      .btn-color-1:hover,
+      .btn-color-2:hover {
+        cursor: pointer;
+      }
+
+      .btn-color-1,
+      .btn-color-2:hover {
+        background: rgb(53, 53, 53);
+        color: white;
+      }
+
+      .btn-color-1:hover {
+        background: rgb(0, 0, 0);
+      }
+
+      .btn-color-2 {
+        background: none;
+      }
+
+      .btn-color-2:hover {
+        border: rgb(255, 255, 255) 0.1rem solid;
+      }
+
+      /* ABOUT SECTION */
+      #about {
+        position: relative;
+      }
+
+      .about-containers {
+        gap: 2rem;
+        margin-bottom: 2rem;
+        margin-top: 2rem;
+      }
+
+      .about-details-container {
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .about-containers,
+      .about-details-container {
+        display: flex;
+      }
+
+      .about-pic {
+        border-radius: 2rem;
+        transition: all 0.3s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        /* Removed border completely */
+        aspect-ratio: 1; /* This ensures the image maintains a square aspect ratio */
+      }
+
+      .about-pic:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      }
+
+      .arrow {
+        position: absolute;
+        right: -5rem;
+        bottom: 2.5rem;
+      }
+
+      .details-container {
+        padding: 1.5rem;
+        flex: 1;
+        background: white;
+        border-radius: 2rem;
+        border: rgb(53, 53, 53) 0.1rem solid;
+        border-color: rgb(163, 163, 163);
+        text-align: center;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .details-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, transparent, rgba(83,83,83,0.05));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 2rem;
+      }
+
+      .details-container:hover::before {
+        opacity: 1;
+      }
+
+      .details-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+
+      .section-container {
+        gap: 4rem;
+        height: 80%;
+      }
+
+      .section__pic-container {
+        height: 400px;
+        width: 400px;
+        margin: auto 0;
+      }
+
+      
+      /* EXPERIENCE SECTION */
+      #experience {
+        position: relative;
+      }
+
+      .experience-sub-title {
+        color: rgb(85, 85, 85);
+        font-weight: 600;
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .experience-details-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .article-container {
+        display: flex;
+        text-align: initial;
+        flex-wrap: wrap;
+        flex-direction: row;
+        gap: 2.5rem;
+        justify-content: space-around;
+      }
+
+      article {
+        display: flex;
+        width: 10rem;
+        justify-content: space-around;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      article:hover {
+        transform: scale(1.05);
+      }
+
+      article .icon {
+        cursor: default;
+        transition: all 0.3s ease;
+      }
+
+      article:hover .icon {
+        transform: rotate(10deg);
+      }
+
+      /* PROJECTS SECTION */
+      #projects {
+        position: relative;
+      }
+
+      .color-container {
+        border-color: rgb(163, 163, 163);
+        background: rgb(250, 250, 250);
+        transition: all 0.3s ease;
+      }
+
+      .color-container:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      }
+
+      .project-img {
+        border-radius: 2rem;
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+      }
+
+      .project-img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+
+      .project-title {
+        margin: 1rem;
+        color: black;
+      }
+
+      .project-btn {
+        color: black;
+        border-color: rgb(163, 163, 163);
+      }
+
+      /* CONTACT */
+      #contact {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 70vh;
+        /* Removed background, border-radius, and padding */
+      }
+
+      .contact-info-upper-container {
+        display: flex;
+        justify-content: center;
+        border-radius: 2rem;
+        border: rgb(53, 53, 53) 0.1rem solid;
+        border-color: rgb(163, 163, 163);
+        background: white;
+        margin: 2rem auto;
+        padding: 0.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      .contact-info-upper-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      }
+
+      .contact-info-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .contact-info-container:hover {
+        transform: translateX(10px);
+      }
+
+      .contact-info-container p {
+        font-size: larger;
+      }
+
+      .contact-icon {
+        cursor: default;
+        transition: all 0.3s ease;
+      }
+
+      .contact-info-container:hover .contact-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .email-icon {
+        height: 2.5rem;
+      }
+
+      /* FOOTER SECTION */
+      footer {
+        height: 26vh;
+        margin: 0 1rem;
+      }
+
+      footer p {
+        text-align: center;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media screen and (max-width: 1400px) {
+        #profile {
+          height: 83vh;
+          margin-bottom: 6rem;
+        }
+        
+        .about-containers {
+          flex-wrap: wrap;
+        }
+        
+        #contact,
+        #projects {
+          height: fit-content;
+        }
+      }
+
+      @media screen and (max-width: 1200px) {
+        .about-pic {
+          border-radius: 50%;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+          aspect-ratio: 1; /* Keeps the square aspect ratio even when circular */
+        }
+        #desktop-nav {
+          display: none;
+        }
+        #hamburger-nav {
+          display: flex;
+        }
+        #experience,
+        .experience-details-container {
+          margin-top: 2rem;
+        }
+        #profile,
+        .section-container {
+          display: block;
+        }
+        .arrow {
+          display: none;
+        }
+        section,
+        .section-container {
+          height: fit-content;
+        }
+        section {
+          margin: 0 5%;
+        }
+        .section__pic-container {
+          width: 275px;
+          height: 275px;
+          margin: 0 auto 2rem;
+        }
+        .about-containers {
+          margin-top: 0;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        #contact,
+        footer {
+          height: 40vh;
+        }
+        #profile {
+          height: 83vh;
+          margin-bottom: 0;
+        }
+        article {
+          font-size: 1rem;
+        }
+        footer nav {
+          height: fit-content;
+          margin-bottom: 2rem;
+        }
+        .about-containers,
+        .contact-info-upper-container,
+        .btn-container {
+          flex-wrap: wrap;
+        }
+        .contact-info-container {
+          margin: 0;
+        }
+        .contact-info-container p,
+        .nav-links li a {
+          font-size: 1rem;
+        }
+        .experience-sub-title {
+          font-size: 1.25rem;
+        }
+        .logo {
+          font-size: 1.5rem;
+        }
+        .nav-links {
+          flex-direction: column;
+          gap: 0.5rem;
+          text-align: center;
+        }
+        .section__pic-container {
+          width: 200px;
+          height: 200px;
+          margin: 0 auto 2rem;
+          justify-content: center;
+        }
+        .section__text__p2 {
+          font-size: 1.25rem;
+        }
+        .title {
+          font-size: 2rem;
+        }
+        .text-container {
+          text-align: justify;
+        }
+        
+        .hamburger-icon {
+          padding: 3px;
+        }
+        
+        .menu-links a {
+          padding: 12px 15px;
+          font-size: 1rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <nav id="desktop-nav">
+    <nav id="desktop-nav" class="fade-in">
       <div class="logo">Ibrahim Raji</div>
       <div>
         <ul class="nav-links">
@@ -20,7 +771,7 @@
         </ul>
       </div>
     </nav>
-    <nav id="hamburger-nav">
+    <nav id="hamburger-nav" class="fade-in">
       <div class="logo">Ibrahim Raji</div>
       <div class="hamburger-menu">
         <div class="hamburger-icon" onclick="toggleMenu()">
@@ -37,10 +788,10 @@
       </div>
     </nav>
     <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets" alt="profile picture" />
+      <div class="section__pic-container fade-in-up">
+        <img src="./assets/IMG_9092.JPEG" alt="profile picture" />
       </div>
-      <div class="section__text">
+      <div class="section__text fade-in-up">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Ibrahim Raji</h1>
         <p class="section__text__p2">Frontend Developer</p>
@@ -65,20 +816,20 @@
         </div>
       </div>
     </section>
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
+    <section id="about" class="section-border">
+      <p class="section__text__p1 fade-in-up">Get To Know More</p>
+      <h1 class="title fade-in-up">About Me</h1>
       <div class="section-container">
-        <div class="section__pic-container">
+        <div class="section__pic-container fade-in-up">
           <img
-            src="./assets/"
+            src="./assets/IMG_9095.JPEG"
             alt="Profile picture"
             class="about-pic"
           />
         </div>
         <div class="about-details-container">
           <div class="about-containers">
-            <div class="details-container">
+            <div class="details-container fade-in-up">
               <img
                 src="./assets/experience.png"
                 alt="Experience icon"
@@ -87,7 +838,7 @@
               <h3>Experience</h3>
               <p>Less than a year<br />Frontend Development</p>
             </div>
-            <div class="details-container">
+            <div class="details-container fade-in-up">
               <img
                 src="./assets/education.png"
                 alt="Education icon"
@@ -97,15 +848,9 @@
               <p>B.Sc. Bachelors Degree In Progress</p>
             </div>
           </div>
-          <div class="text-container">
-            <p>
-              I’m a Front-End Developer with a passion for creating sleek, responsive, and user-friendly web interfaces. I specialize in HTML, CSS, and JavaScript, and I’m growing my skills with React to build dynamic, modern applications.
-
-            I enjoy turning ideas and designs into fully functional websites, with attention to detail, accessibility, and smooth user experience. My goal is to keep learning and pushing the boundaries of what’s possible on the web.
-
-            ⚡ Tech Stack: HTML, CSS, JavaScript, React, Git, GitHub
-            💡 Interests: UI/UX, animations, responsive design, and crafting clean, reusable code.
-            </p>
+          <div class="text-container fade-in-up">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis, provident!</p>
+              
           </div>
         </div>
       </div>
@@ -116,12 +861,12 @@
         onclick="location.href='./#experience'"
       />
     </section>
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
+    <section id="experience" class="section-border">
+      <p class="section__text__p1 fade-in-up">Explore My</p>
+      <h1 class="title fade-in-up">Experience</h1>
       <div class="experience-details-container">
         <div class="about-containers">
-          <div class="details-container">
+          <div class="details-container fade-in-up">
             <h2 class="experience-sub-title">Frontend Development</h2>
             <div class="article-container">
               <article>
@@ -181,8 +926,8 @@
               </article>
             </div>
           </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
+          <div class="details-container fade-in-up">
+            <h2 class="experience-sub-title">Backend Development</h2>
             <div class="article-container">
               <article>
                 <img
@@ -239,15 +984,15 @@
         onclick="location.href='./#projects'"
       />
     </section>
-    <section id="projects">
-      <p class="section__text__p1">Review My Recent</p>
-      <h1 class="title">Projects</h1>
+    <section id="projects" class="section-border">
+      <p class="section__text__p1 fade-in-up">Review My Recent</p>
+      <h1 class="title fade-in-up">Projects</h1>
       <div class="experience-details-container">
         <div class="about-containers">
-          <div class="details-container color-container">
+          <div class="details-container color-container fade-in-up">
             <div class="article-container">
               <img
-                src="./assets/"
+                src="./assets/download.png"
                 alt="Project 1"
                 class="project-img"
               />
@@ -256,19 +1001,17 @@
             <div class="btn-container">
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
+                onclick="location.href='https://github.com/jibolaaa/shoesProj'">
                 Github
               </button>
               <button
                 class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
+                onclick="location.href='https://shoes-proj-nj1w.vercel.app/'">
                 Live Demo
               </button>
             </div>
           </div>
-          <div class="details-container color-container">
+          <div class="details-container color-container fade-in-up">
             <div class="article-container">
               <img
                 src="./assets"
@@ -292,7 +1035,7 @@
               </button>
             </div>
           </div>
-          <div class="details-container color-container">
+          <div class="details-container color-container fade-in-up">
             <div class="article-container">
               <img
                 src="./assets"
@@ -325,10 +1068,10 @@
         onclick="location.href='./#contact'"
       />
     </section>
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
+    <section id="contact" class="section-border">
+      <p class="section__text__p1 fade-in-up">Get in Touch</p>
+      <h1 class="title fade-in-up">Contact Me</h1>
+      <div class="contact-info-upper-container fade-in-up">
         <div class="contact-info-container">
           <img
             src="./assets/email.png"
@@ -360,6 +1103,54 @@
       </nav>
       <p>Copyright &#169; 2025 Ibrahim Raji. All Rights Reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script>
+      function toggleMenu() {
+        const menu = document.querySelector(".menu-links");
+        const icon = document.querySelector(".hamburger-icon");
+        menu.classList.toggle("open");
+        icon.classList.toggle("open");
+      }
+
+      // Scroll animations
+      function handleScrollAnimations() {
+        const elements = document.querySelectorAll('.fade-in-up, .fade-in, .section-border');
+        
+        elements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('animate');
+          }
+        });
+      }
+
+      // Initialize animations on page load
+      window.addEventListener('load', () => {
+        // Trigger initial animations for elements in view
+        handleScrollAnimations();
+        
+        // Add animate class to nav immediately
+        const nav = document.querySelector('#desktop-nav, #hamburger-nav');
+        if (nav) nav.classList.add('animate');
+      });
+
+      // Trigger animations on scroll
+      window.addEventListener('scroll', handleScrollAnimations);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
