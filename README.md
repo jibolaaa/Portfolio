@@ -7,7 +7,8 @@ Live: hosted on Netlify.
 
 ## Highlights
 - FireSafe: end-to-end IoT fire & gas detection (ESP32 + Flask + Supabase + React Native)
-- STRIDE: full-stack e-commerce with Paystack payments (github.com/jibolaaa/sneaker-store-claude)
+- Swiftplate: multi-role food delivery platform, 4 roles, 2 mobile apps, RBAC (github.com/jibolaaa/swiftplate-platform)
+- STRIDE: full-stack e-commerce with Paystack payments (github.com/jibolaaa/stride-store)
 - Golden Hour: restaurant website demo (goldenhour-demo.netlify.app)
 - Terra House: hotel website demo (terrahouse-demo.netlify.app)
 
