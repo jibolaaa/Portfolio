@@ -3,6 +3,8 @@
 Personal site of Raji Ibrahim Ajibola, software engineer in Lagos
 (B.Sc. Software Engineering, Bowen University, 2026).
 
+Live at https://portfolio-eta-drab-82.vercel.app (Vercel deploys every push to `main`).
+
 One hand-written `index.html` with inline CSS and a few lines of JavaScript.
 No framework and no build step, so any static host can serve the repo root as it is.
 
