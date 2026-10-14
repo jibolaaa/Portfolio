@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/cv", "destination": "/Ibrahim-Raji-CV.pdf", "permanent": false }
+  ]
+}

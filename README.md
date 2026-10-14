@@ -18,5 +18,6 @@ No framework and no build step, so any static host can serve the repo root as it
 - `index.html`: the whole page
 - `assets/fonts/`: Instrument Sans, plus small cuts of Fraunces and Marcellus for the two site cards (all SIL Open Font License)
 - `assets/img/`: project screens, the avatar (also the favicon) and `og.jpg`, the image shown when the link is shared
+- `Ibrahim-Raji-CV.pdf`: the CV behind the CV buttons; `vercel.json` makes `/cv` open it
 
 The app screens are rebuilt from each app's own code with sample data.
