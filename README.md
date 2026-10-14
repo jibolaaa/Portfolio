@@ -16,7 +16,7 @@ No framework and no build step, so any static host can serve the repo root as it
 
 ## Files
 - `index.html`: the whole page
-- `assets/fonts/`: Instrument Sans (SIL Open Font License)
-- `assets/img/`: project screens, the pixel-art avatar (also the favicon) and `og.jpg`, the image shown when the link is shared
+- `assets/fonts/`: Instrument Sans, plus small cuts of Fraunces and Marcellus for the two site cards (all SIL Open Font License)
+- `assets/img/`: project screens, the avatar (also the favicon) and `og.jpg`, the image shown when the link is shared
 
 The app screens are rebuilt from each app's own code with sample data.

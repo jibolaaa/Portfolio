@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://ibrahimraji.vercel.app/">
 <link rel="icon" href="assets/img/avatar.svg" type="image/svg+xml">
 <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" sizes="180x180">
 <link rel="preload" href="assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ibrahim Raji, software engineer in Lagos">
@@ -19,12 +19,16 @@
 <meta property="og:image" content="https://ibrahimraji.vercel.app/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Ibrahim Raji's pixel-art avatar above the line: I build complete products, from the circuit board to the app in your hand.">
+<meta property="og:image:alt" content="Ibrahim Raji's avatar above the line: I build complete products, from the circuit board to the app in your hand.">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ibrahim Raji","url":"https://ibrahimraji.vercel.app/","alternateName":"Raji Ibrahim Ajibola","jobTitle":"Software Engineer","address":{"@type":"PostalAddress","addressLocality":"Lagos","addressCountry":"NG"},"alumniOf":{"@type":"CollegeOrUniversity","name":"Bowen University"},"email":"mailto:ajibolaraji2@gmail.com","sameAs":["https://www.linkedin.com/in/ibrahim-raji-38ab15380","https://github.com/jibolaaa"]}</script>
 <style>
-/* Instrument Sans, SIL Open Font License */
+/* Instrument Sans, Fraunces and Marcellus are all under the SIL Open Font License.
+   The last two are cut down to the few letters on the two site cards. */
 @font-face{font-family:"Instrument";src:url(assets/fonts/instrument-sans.woff2) format("woff2");font-weight:400 700;font-stretch:75% 100%;font-display:swap}
+@font-face{font-family:"Fraunces";src:url(assets/fonts/fraunces-gh.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Fraunces Italic";src:url(assets/fonts/fraunces-gh-italic.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Marcellus";src:url(assets/fonts/marcellus-th.woff2) format("woff2");font-weight:400;font-display:swap}
 
 :root{
   --black:#000; --ink:#F3F3F1; --ash:#A3A3A3; --graphite:#6E6E6E; --line:#1F1F1F;
@@ -73,7 +77,7 @@ html.menu-open{overflow:hidden}
 
 /* hero: the one moment on the page */
 .hero{padding:48px 0 88px}
-.pfp{display:block;width:64px;height:64px;margin-bottom:28px;border-radius:16px;image-rendering:pixelated}
+.pfp{display:block;width:72px;height:72px;margin-bottom:28px;border-radius:18px}
 .statement{font-size:clamp(36px,5.4vw,64px);line-height:1.04;font-weight:500;font-stretch:88%;letter-spacing:-.035em;max-width:14.2em}
 .sub{margin-top:28px;color:var(--ash);font-size:17px;max-width:30em}
 .actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
@@ -83,7 +87,7 @@ html.menu-open{overflow:hidden}
 .btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px #3A3A3A;transition:box-shadow .2s}
 .btn.line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 @media (max-width:520px){.hero .btn{flex:1;padding:0 14px}}
-@media (min-width:900px){.hero{padding:104px 0 150px}.pfp{width:96px;height:96px;border-radius:22px;margin-bottom:36px}.sub{font-size:19px;margin-top:36px}.actions{margin-top:36px}}
+@media (min-width:900px){.hero{padding:104px 0 150px}.pfp{width:88px;height:88px;border-radius:21px;margin-bottom:36px}.sub{font-size:19px;margin-top:36px}.actions{margin-top:36px}}
 
 /* section headings */
 .sec{font-size:15px;font-weight:500;color:var(--ash);padding-top:18px;border-top:1px solid var(--line);margin-bottom:28px}
@@ -128,10 +132,24 @@ html.menu-open{overflow:hidden}
 .biz{padding:40px 0 96px}
 .biz-lede{font-size:clamp(22px,3vw,32px);line-height:1.2;font-weight:500;font-stretch:92%;letter-spacing:-.02em;max-width:22em}
 .sites{display:grid;gap:44px;margin-top:36px}
-.cover.gh{aspect-ratio:4/3;--lit:radial-gradient(110% 85% at 50% 0%,rgba(217,164,65,.45) 0%,rgba(217,164,65,.09) 45%,rgba(0,0,0,0) 75%)}
-.cover.th{aspect-ratio:4/3;--lit:radial-gradient(110% 85% at 50% 0%,rgba(196,146,86,.45) 0%,rgba(196,146,86,.09) 45%,rgba(0,0,0,0) 75%)}
-.cover .one{left:27%;width:46%;top:9%}
-@media (min-width:760px){.cover .one{left:32%;width:36%;top:8%}}
+.bcard{position:relative;isolation:isolate;display:flex;flex-direction:column;aspect-ratio:16/10;border-radius:16px;overflow:hidden;padding:18px 20px 22px;box-shadow:inset 0 0 0 1px var(--line)}
+.bcard .bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;max-width:none;object-fit:cover}
+.bcard::after{content:"";position:absolute;inset:0;z-index:-1}
+.bcard .lg{font-size:15px}
+.bcard .lg em{font-style:normal}
+.bcard .hd{font-size:clamp(28px,7.6vw,40px);line-height:1.04}
+.bcard.gh{background:radial-gradient(120% 90% at 50% 10%,#2A2213 0%,#131009 70%);color:#F4EDE1;font-family:"Fraunces",serif}
+.bcard.gh .bg{filter:brightness(.38) saturate(.9)}
+.bcard.gh .lg{font-weight:500;letter-spacing:.02em}
+.bcard.gh .lg em,.bcard.gh .hd em{color:#D9A441}
+.bcard.gh .hd{margin:auto;text-align:center;font-weight:500}
+.bcard.gh .hd em{font-family:"Fraunces Italic","Fraunces",serif}
+.bcard.th{background:linear-gradient(170deg,#4A3A28 0%,#2B2118 80%);color:#fff;font-family:"Marcellus",serif;justify-content:space-between}
+.bcard.th .bg{filter:brightness(.55) saturate(.95)}
+.bcard.th::after{background:linear-gradient(180deg,rgba(43,33,24,.25) 0%,rgba(43,33,24,.05) 45%,rgba(43,33,24,.75) 100%)}
+.bcard.th .lg{letter-spacing:.06em}
+.bcard.th .lg em{color:#E7C489}
+.bcard.th .hd{max-width:12ch}
 .site-cap{margin-top:18px;display:grid;gap:6px}
 .site-cap h3{font-size:22px;font-weight:500;font-stretch:92%;letter-spacing:-.02em}
 .site-cap p{color:var(--ash)}
@@ -197,12 +215,12 @@ footer a:hover{color:var(--ink)}
 
 <main>
 <section class="hero" id="top"><div class="wrap">
-  <img class="pfp fade" style="--d:0ms" src="assets/img/avatar.svg" width="64" height="64" alt="Pixel-art avatar of Ibrahim in shades and a black hoodie">
+  <img class="pfp fade" style="--d:0ms" src="assets/img/avatar.svg" width="72" height="72" alt="Cartoon avatar of Ibrahim in shades and a black hoodie">
   <h1 class="statement">I build complete products, from the circuit board to the app in your hand.</h1>
   <p class="sub fade" style="--d:820ms">Software engineer in Lagos. Open to graduate roles and website projects.</p>
   <div class="actions fade" style="--d:940ms">
-    <a class="btn" href="https://wa.me/2348105432993" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 18.3A8.5 8.5 0 1 0 5.7 16.6L3.5 20.5Z"/></svg>WhatsApp me</a>
-    <a class="btn line" href="mailto:ajibolaraji2@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7.3 8.2 5.7 8.2-5.7"/></svg>Email me</a>
+    <a class="btn" href="https://wa.me/2348105432993" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 18.3A8.5 8.5 0 1 0 5.7 16.6L3.5 20.5Z"/></svg>WhatsApp</a>
+    <a class="btn line" href="mailto:ajibolaraji2@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7.3 8.2 5.7 8.2-5.7"/></svg>Email</a>
   </div>
 </div></section>
 
@@ -253,11 +271,11 @@ footer a:hover{color:var(--ink)}
   <p class="biz-lede">I build websites that bring local businesses orders and bookings, straight to WhatsApp.</p>
   <div class="sites">
     <article>
-      <a class="cover gh" href="https://goldenhour-demo.netlify.app" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img class="ph one" src="assets/img/goldenhour-menu.webp" alt="Golden Hour menu on a phone, with prices and an order button for each dish" width="560" height="1212" loading="lazy" decoding="async"></a>
+      <a class="bcard gh" href="https://goldenhour-demo.netlify.app" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img class="bg" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=70&w=1200" srcset="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=70&w=1200 1200w" sizes="(min-width: 760px) 50vw, 100vw" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="lg">Golden <em>Hour</em></span><span class="hd">Where every hour<br>is <em>golden.</em></span></a>
       <div class="site-cap"><h3>Golden Hour</h3><p>Concept site for a café, with a menu, WhatsApp ordering and table booking.</p><p class="links"><a href="https://goldenhour-demo.netlify.app" target="_blank" rel="noopener">Visit site</a><a href="https://github.com/jibolaaa/golden-hour-demo" target="_blank" rel="noopener">Code</a></p></div>
     </article>
     <article>
-      <a class="cover th" href="https://terrahouse-demo.netlify.app" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img class="ph one" src="assets/img/terrahouse-booking.webp" alt="Terra House booking form on a phone, sending dates to WhatsApp" width="560" height="1212" loading="lazy" decoding="async"></a>
+      <a class="bcard th" href="https://terrahouse-demo.netlify.app" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img class="bg" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=70&w=1200" srcset="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=70&w=640 640w, https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=70&w=1200 1200w" sizes="(min-width: 760px) 50vw, 100vw" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="lg">Terra <em>House</em></span><span class="hd">Rest, the Lagos way.</span></a>
       <div class="site-cap"><h3>Terra House</h3><p>Concept site for a hotel, with room rates and bookings sent to WhatsApp.</p><p class="links"><a href="https://terrahouse-demo.netlify.app" target="_blank" rel="noopener">Visit site</a><a href="https://github.com/jibolaaa/terra-house-demo" target="_blank" rel="noopener">Code</a></p></div>
     </article>
   </div>
@@ -281,7 +299,7 @@ footer a:hover{color:var(--ink)}
   <h2 class="sec">Contact</h2>
   <p class="big">Have a role or a project in mind?</p>
   <a class="mail" href="mailto:ajibolaraji2@gmail.com">ajibolaraji2@gmail.com</a>
-  <div class="actions"><a class="btn" href="https://wa.me/2348105432993" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 18.3A8.5 8.5 0 1 0 5.7 16.6L3.5 20.5Z"/></svg>WhatsApp me</a></div>
+  <div class="actions"><a class="btn" href="https://wa.me/2348105432993" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 18.3A8.5 8.5 0 1 0 5.7 16.6L3.5 20.5Z"/></svg>WhatsApp</a></div>
   <ul class="elsewhere">
     <li><a href="https://www.linkedin.com/in/ibrahim-raji-38ab15380" target="_blank" rel="noopener">LinkedIn</a></li>
     <li><a href="https://github.com/jibolaaa" target="_blank" rel="noopener">GitHub</a></li>
