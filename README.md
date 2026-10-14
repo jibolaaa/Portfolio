@@ -1,20 +1,20 @@
-# Raji Ibrahim Ajibola | Portfolio
+# Ibrahim Raji, portfolio
 
-Personal portfolio of Raji Ibrahim Ajibola, Software Engineer
+Personal site of Raji Ibrahim Ajibola, software engineer in Lagos
 (B.Sc. Software Engineering, Bowen University, 2026).
 
-Live: hosted on Netlify.
+One hand-written `index.html` with inline CSS and a few lines of JavaScript.
+No framework and no build step, so any static host can serve the repo root as it is.
 
-## Highlights
-- FireSafe: end-to-end IoT fire & gas detection (ESP32 + Flask + Supabase + React Native)
-- Swiftplate: multi-role food delivery platform, 4 roles, 2 mobile apps, RBAC (github.com/jibolaaa/swiftplate-platform)
-- STRIDE: full-stack e-commerce with Paystack payments (github.com/jibolaaa/stride-store)
-- Golden Hour: restaurant website demo (goldenhour-demo.netlify.app)
-- Terra House: hotel website demo (terrahouse-demo.netlify.app)
+## What's on it
+- **Swiftplate**: food delivery platform, four apps on one backend ([code](https://github.com/jibolaaa/swiftplate-platform))
+- **STRIDE**: sneaker store with a Paystack checkout ([code](https://github.com/jibolaaa/stride-store))
+- **FireSafe**: ESP32 fire and gas alarm with a Flask server and a React Native app (final-year project)
+- **Golden Hour** and **Terra House**: concept sites for a café and a hotel
 
-Single-file site: hand-written HTML/CSS/JS, no frameworks, no build step.
+## Files
+- `index.html`: the whole page
+- `assets/fonts/`: Instrument Sans, plus small cuts of Fraunces and Marcellus for the two site cards (all SIL Open Font License)
+- `assets/img/`: project screens, the pixel-art avatar (also the favicon) and `og.jpg`, the image shown when the link is shared
 
-## History
-The first commit era of this repo holds my original student portfolio.
-The current version is a complete redesign, built as I moved from
-learning to shipping.
+The app screens are rebuilt from each app's own code with sample data.
