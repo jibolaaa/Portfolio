@@ -189,9 +189,11 @@ html.menu-open{overflow:hidden}
 footer .foot{display:flex;justify-content:space-between;gap:16px;padding:22px 0 36px;margin-top:72px;border-top:1px solid var(--line);color:var(--graphite);font-size:14px}
 footer a:hover{color:var(--ink)}
 
-/* load sequence for the rest of the page (only when JS runs and motion is allowed) */
+/* load sequence (only when JS runs and motion is allowed): header, hero, then the top of Work */
 .js .fade{opacity:0;transform:translateY(10px);transition:opacity .8s ease,transform .8s var(--ease);transition-delay:var(--d,0ms)}
 .js.ready .fade{opacity:1;transform:none}
+.js .seq{opacity:0;transform:translateY(16px)}
+.js .seq.in{opacity:1;transform:none;transition:opacity 1.1s ease,transform 1.4s var(--ease)}
 
 /* hero intro: words start narrow and light, grow into shape, then one slow breath runs through */
 .js .hero.pending .wrap>*{opacity:0}
@@ -212,8 +214,8 @@ footer a:hover{color:var(--ink)}
 <script>
   document.documentElement.classList.add("hasjs");
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("js");
-  // never leave the hero hidden if the main script fails
-  setTimeout(function () { var h = document.querySelector(".hero"); if (h) h.classList.remove("pending"); }, 3500);
+  // if the intro hasn't started within 3 seconds (script or fonts stuck), just show the page as it is
+  setTimeout(function () { if (!window.introRan) document.documentElement.classList.remove("js"); }, 3000);
 </script>
 </head>
 <body>
@@ -245,10 +247,10 @@ footer a:hover{color:var(--ink)}
 </div></section>
 
 <section class="work" id="work"><div class="wrap">
-  <h2 class="sec fade" style="--d:1070ms">Work</h2>
+  <h2 class="sec seq">Work</h2>
 
   <article class="proj">
-    <div class="cover sw fade" style="--d:1170ms">
+    <div class="cover sw seq">
       <a class="cover-link" href="https://swiftplate-platform.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
       <img class="ph a" src="assets/img/rider-available.webp" alt="Swiftplate rider app listing deliveries to claim" width="560" height="1212">
       <img class="ph b" src="assets/img/rider-delivery.webp" alt="Swiftplate rider app with a delivery on its way to the customer" width="560" height="1212">
@@ -355,22 +357,22 @@ footer a:hover{color:var(--ink)}
   var root = document.documentElement;
   var motion = root.classList.contains("js");
 
-  // the rest of the page fades in once fonts are ready
+  // ---------- load sequence ----------
+  // header, avatar, then the headline in Living type (words start narrow and light and grow into
+  // shape), the line under it, the buttons, and only then the top of Work. One slow breath runs
+  // through the headline at the end.
   var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  if (motion) {
-    var go = function () { requestAnimationFrame(function () { root.classList.add("ready"); }); };
-    fontsReady.then(go);
-    setTimeout(go, 1200); // never leave the page hidden if fonts stall
-  }
-
-  // ---------- hero intro (Living type) ----------
-  // Words start narrow and light and grow into shape, then one slow breath runs through the line.
   var sec = document.querySelector(".hero");
   var h = sec.querySelector(".statement");
   var text = h.textContent.trim();
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  function start() {
+    if (!root.classList.contains("js")) return; // the safety timer already showed the page
+    window.introRan = true;
+    root.classList.add("ready");
+    intro();
+  }
   function intro() {
-    if (!sec.classList.contains("pending")) return; // the safety timer already showed the page
     var words = text.split(/\s+/), widths = [], from = 0;
     h.textContent = text;
     var node = h.firstChild, r = document.createRange();
@@ -388,6 +390,7 @@ footer a:hover{color:var(--ink)}
     var lw = [].slice.call(h.querySelectorAll(".lw"));
     var pfp = sec.querySelector(".pfp");
     var rest = [sec.querySelector(".sub")].concat([].slice.call(sec.querySelectorAll(".actions .btn")));
+    var seq = [].slice.call(document.querySelectorAll(".seq"));
     [pfp].concat(rest).forEach(function (el) { el.classList.add("rv"); });
     sec.classList.remove("pending");
     void sec.offsetWidth; // paint the start state before anything moves
@@ -396,17 +399,28 @@ footer a:hover{color:var(--ink)}
     lw.forEach(function (el, i) { at(350 + i * 95, function () { el.classList.add("in"); }); });
     var head = 350 + (lw.length - 1) * 95 + 1500;
     rest.forEach(function (el, i) { at(head - 500 + (i ? 160 + (i - 1) * 120 : 0), function () { el.classList.add("in"); }); });
+    // Work comes in right after the last button
+    var lastBtn = head - 500 + 160 + (rest.length - 2) * 120;
+    seq.forEach(function (el, i) { at(lastBtn + 300 + i * 160, function () { el.classList.add("in"); }); });
     lw.forEach(function (el, i) {
       at(head + 600 + i * 70, function () { el.classList.add("wave"); at(1000, function () { el.classList.remove("wave"); }); });
     });
+    // someone who starts scrolling shouldn't wait for the sequence: show everything now
+    var hurry = function () {
+      if (window.scrollY < 24) return;
+      window.removeEventListener("scroll", hurry);
+      [pfp].concat(rest, lw, seq).forEach(function (el) { el.classList.add("in"); });
+    };
+    window.addEventListener("scroll", hurry, { passive: true });
     // once everything is still, hand back plain text so the headline reflows normally on rotate or resize
     at(head + 600 + lw.length * 70 + 2300, function () {
+      window.removeEventListener("scroll", hurry);
       [pfp].concat(rest).forEach(function (el) { el.classList.remove("rv", "in"); });
       h.textContent = text;
       h.removeAttribute("aria-label");
     });
   }
-  if (motion) fontsReady.then(intro); else sec.classList.remove("pending");
+  if (motion) fontsReady.then(function () { requestAnimationFrame(start); });
 
   // header gets a hairline once the page scrolls
   var top = document.querySelector(".top");
