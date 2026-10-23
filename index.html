@@ -80,6 +80,9 @@ html.menu-open{overflow:hidden}
 .pfp{display:block;width:72px;height:72px;margin-bottom:28px;border-radius:18px}
 .statement{font-size:clamp(52px,10.5vw,124px);line-height:.98;font-weight:500;font-stretch:88%;letter-spacing:-.04em;max-width:14.2em}
 .sub{margin-top:28px;color:var(--ash);font-size:17px;max-width:30em}
+.tags{margin-top:14px;color:var(--graphite);font-size:14px;letter-spacing:.01em}
+.tags span{margin:0 .55em}
+@media (min-width:900px){.tags{font-size:15px;margin-top:16px}}
 .actions{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--black);font-size:15px;font-weight:550;white-space:nowrap;transition:background-color .2s}
 .btn:hover{background:#fff}
@@ -101,11 +104,15 @@ html.menu-open{overflow:hidden}
 .cover{position:relative;display:block;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--lit),#070707;box-shadow:inset 0 0 0 1px var(--line)}
 .cover.sw{--lit:radial-gradient(110% 80% at 50% 0%,rgba(232,69,46,.55) 0%,rgba(232,69,46,.12) 45%,rgba(0,0,0,0) 75%)}
 .cover.fs{--lit:radial-gradient(110% 80% at 50% 0%,rgba(255,120,50,.5) 0%,rgba(255,120,50,.1) 45%,rgba(0,0,0,0) 75%)}
-.cover.st{aspect-ratio:4/3;--lit:radial-gradient(110% 85% at 50% 0%,rgba(255,255,255,.22) 0%,rgba(255,255,255,.05) 45%,rgba(0,0,0,0) 75%)}
+.cover.st{aspect-ratio:4/5;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;padding:20px 20px 24px;background:linear-gradient(165deg,#3a3a3a 0%,#121212 70%);color:#fff}
+.cover.st .bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;max-width:none;object-fit:cover}
+.cover.st::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.74),rgba(0,0,0,.3) 45%,rgba(0,0,0,0) 72%)}
+.st-logo{position:absolute;left:20px;top:20px;font-weight:700;font-size:17px;line-height:1;letter-spacing:.02em}
+.st-hd{font-weight:700;font-size:clamp(44px,12vw,84px);line-height:.98;letter-spacing:-.035em;max-width:7em}
+.st-sub{margin-top:12px;max-width:30ch;font-size:15px;line-height:1.45;opacity:.92}
 .cover .ph{position:absolute;height:auto;width:42%;top:9%;border-radius:12%/5.55%;box-shadow:0 30px 60px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.08)}
 .cover .a{left:6%}
 .cover .b{right:6%;top:15%}
-.cover .site{position:absolute;height:auto;max-width:none;width:100%;left:7%;top:12%;border-radius:10px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
 
 .cap{display:grid;gap:10px;margin-top:20px}
 .cap-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
@@ -129,11 +136,12 @@ html.menu-open{overflow:hidden}
 @media (min-width:900px){
   .proj{margin-bottom:120px}
   .cover{aspect-ratio:16/9;border-radius:20px}
-  .cover.st{aspect-ratio:16/9}
+  .cover.st{aspect-ratio:16/9;padding:28px 36px 34px}
+  .st-logo{left:36px;top:28px;font-size:21px}
+  .st-sub{font-size:17px}
   .cover .ph{width:24%;top:10%}
   .cover .a{left:24%}
   .cover .b{right:24%;top:16%}
-  .cover .site{width:78%;left:11%;top:11%}
   .cap{grid-template-columns:5fr 7fr;column-gap:40px;margin-top:26px}
   .cap-head{grid-row:span 3;flex-direction:column;justify-content:flex-start;gap:4px}
   .cap h3{font-size:30px}
@@ -240,7 +248,8 @@ footer a:hover{color:var(--ink)}
 <section class="hero pending" id="top"><div class="wrap">
   <img class="pfp" src="assets/img/avatar.svg" width="72" height="72" alt="Cartoon avatar of Ibrahim in shades and a black hoodie">
   <h1 class="statement">Ibrahim Raji</h1>
-  <p class="sub">Full-stack software engineer in Lagos, Nigeria. I work with Next.js, React Native and PostgreSQL, and I'm open to graduate roles and freelance projects.</p>
+  <p class="sub">Full-stack software engineer based in Lagos, Nigeria. Open to graduate roles and freelance projects.</p>
+  <p class="tags" hidden>Next.js<span aria-hidden="true">·</span>React Native<span aria-hidden="true">·</span>PostgreSQL</p>
   <div class="actions">
     <a class="btn" href="https://wa.me/2348105432993" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.4 18.3A8.5 8.5 0 1 0 5.7 16.6L3.5 20.5Z"/></svg>WhatsApp</a>
     <a class="btn line" href="mailto:ajibolaraji2@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m3.8 7.3 8.2 5.7 8.2-5.7"/></svg>Email</a>
@@ -271,8 +280,11 @@ footer a:hover{color:var(--ink)}
   <article class="proj">
     <div class="cover st">
       <a class="cover-link" href="https://stride-store-ng.vercel.app" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"></a>
-      <img class="site" src="assets/img/stride.webp" alt="The STRIDE online store home page" width="1040" height="646" loading="lazy" decoding="async">
-      <div class="pills">
+      <img class="bg" src="https://images.unsplash.com/photo-1783945345850-82f0b7fd38d3?auto=format&fit=crop&q=70&w=1400" srcset="https://images.unsplash.com/photo-1783945345850-82f0b7fd38d3?auto=format&fit=crop&q=70&w=800 800w, https://images.unsplash.com/photo-1783945345850-82f0b7fd38d3?auto=format&fit=crop&q=70&w=1400 1400w, https://images.unsplash.com/photo-1783945345850-82f0b7fd38d3?auto=format&fit=crop&q=70&w=2000 2000w" sizes="(min-width: 900px) 1120px, 100vw" alt="" loading="lazy" decoding="async" onerror="this.remove()">
+      <span class="st-logo">STRIDE</span>
+      <span class="st-hd">New season pairs</span>
+      <span class="st-sub">Fresh pairs, delivered across Lagos in 1 to 2 working days.</span>
+      <div class="pills tr">
         <a class="pill" href="https://stride-store-ng.vercel.app" target="_blank" rel="noopener" aria-label="Visit the STRIDE store">Visit store<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></a>
         <a class="pill" href="https://github.com/jibolaaa/stride-store" target="_blank" rel="noopener" aria-label="STRIDE code on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 7.5-5 4.5 5 4.5"/><path d="m15.5 7.5 5 4.5-5 4.5"/></svg>Code</a>
       </div>
@@ -391,7 +403,7 @@ footer a:hover{color:var(--ink)}
     }).join(" ");
     var lw = [].slice.call(h.querySelectorAll(".lw"));
     var pfp = sec.querySelector(".pfp");
-    var rest = [sec.querySelector(".sub")].concat([].slice.call(sec.querySelectorAll(".actions .btn")));
+    var rest = [].slice.call(sec.querySelectorAll(".sub, .tags:not([hidden])")).concat([].slice.call(sec.querySelectorAll(".actions .btn")));
     var seq = [].slice.call(document.querySelectorAll(".seq"));
     [pfp].concat(rest).forEach(function (el) { el.classList.add("rv"); });
     sec.classList.remove("pending");
@@ -466,6 +478,32 @@ footer a:hover{color:var(--ink)}
     if (e.key === "Escape" && root.classList.contains("menu-open")) { setMenu(false); burger.focus(); }
   });
   matchMedia("(min-width: 760px)").addEventListener("change", function (e) { if (e.matches) setMenu(false); });
+})();
+</script>
+
+<!-- PREVIEW ONLY: name line switcher, removed before going live -->
+<style>
+.lab{position:fixed;left:50%;bottom:16px;z-index:40;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 8px 8px 16px;border-radius:999px;background:rgba(20,20,20,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.12),0 12px 30px rgba(0,0,0,.5);font-size:14px;color:var(--ash);white-space:nowrap}
+.lab button{height:36px;padding:0 16px;border:0;border-radius:999px;background:rgba(255,255,255,.09);color:var(--ink);font:inherit;font-weight:550;cursor:pointer}
+.lab button[aria-pressed="true"]{background:var(--ink);color:var(--black)}
+</style>
+<div class="lab" role="group" aria-label="Preview only: pick the line under your name">
+  <span>Name line</span>
+  <button type="button" data-v="1" aria-pressed="true">1 Role and place</button>
+  <button type="button" data-v="2" aria-pressed="false">2 Plus tools</button>
+</div>
+<script>
+(function () {
+  var tags = document.querySelector(".hero .tags");
+  var btns = [].slice.call(document.querySelectorAll(".lab button"));
+  function pick(v) {
+    tags.hidden = v !== "2";
+    btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.v === v)); });
+    try { localStorage.setItem("pf_line", v); } catch (e) {}
+  }
+  btns.forEach(function (b) { b.addEventListener("click", function () { pick(b.dataset.v); }); });
+  var saved = null; try { saved = localStorage.getItem("pf_line"); } catch (e) {}
+  if (saved === "2") pick("2");
 })();
 </script>
 
