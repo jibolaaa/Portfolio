@@ -1,5 +1,30 @@
 {
   "redirects": [
-    { "source": "/cv", "destination": "/Ibrahim-Raji-CV.pdf", "permanent": false }
-  ]
+    {
+      "source": "/cv",
+      "destination": "/Ibrahim-Raji-CV.pdf",
+      "permanent": false
+    }
+  ],
+  "images": {
+    "sizes": [
+      640,
+      960,
+      1280,
+      1920
+    ],
+    "qualities": [
+      70
+    ],
+    "formats": [
+      "image/webp"
+    ],
+    "minimumCacheTTL": 2678400,
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "images.unsplash.com"
+      }
+    ]
+  }
 }

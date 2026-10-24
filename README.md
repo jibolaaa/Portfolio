@@ -18,5 +18,6 @@ No framework and no build step, so any static host can serve the repo root as it
 - `assets/fonts/`: Instrument Sans, plus small cuts of Fraunces and Marcellus for the two site cards (all SIL Open Font License)
 - `assets/img/`: project screens, the avatar (also the favicon) and `og.jpg`, the image shown when the link is shared
 - `Ibrahim-Raji-CV.pdf`: the CV behind the CV buttons; `vercel.json` makes `/cv` open it
+- Card photos come from Unsplash but load through Vercel's image service (`/_vercel/image`, set up in `vercel.json`), so they arrive from this site, sized for the screen. If that fails, the page falls back to Unsplash directly.
 
 The app screens are rebuilt from each app's own code with sample data.
