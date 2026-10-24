@@ -9,7 +9,6 @@ One hand-written `index.html` with inline CSS and a few lines of JavaScript.
 No framework and no build step, so any static host can serve the repo root as it is.
 
 ## What's on it
-- **Swiftplate**: food delivery platform, four apps on one backend ([code](https://github.com/jibolaaa/swiftplate-platform))
 - **STRIDE**: sneaker store with a Paystack checkout ([code](https://github.com/jibolaaa/stride-store))
 - **FireSafe**: ESP32 fire and gas alarm with a Flask server and a React Native app (final-year project)
 - **Golden Hour** and **Terra House**: concept sites for a café and a hotel
